@@ -24,12 +24,17 @@ namespace Factory.Controllers
     }
     public ActionResult Create()
     {
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
       return View(); 
     }
     [HttpPost]
-    public ActionResult Create(Engineer engineer)
+    public ActionResult Create(Engineer engineer, int MachineId)
     {
       _db.Engineers.Add(engineer);
+      if (MachineId != 0)
+      {
+        _db.EngineerMachine.Add(new EngineerMachine() {EngineerId = engineer.EngineerId, MachineId = MachineId});
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     } 
