@@ -15,7 +15,7 @@ namespace Factory.Controllers
       _db = db; 
     }
     public ActionResult Index()
-    {
+    { 
       List<Engineer> model = _db.Engineers
         .Include(engineer => engineer.Machines)
         .ThenInclude(join => join.Machine)
@@ -53,14 +53,14 @@ namespace Factory.Controllers
       return View(thisEngineer);
     }
     [HttpPost]
-    public ActionResult Edit(Engineer engineer, int MachineId)
+    public ActionResult Edit(Engineer engineer, int MachineId, int id)
     {
-      if (MachineId !=0)
+      if (MachineId != 0)
       {
         _db.EngineerMachine.Add(new EngineerMachine() {MachineId = MachineId, EngineerId = engineer.EngineerId});
       }
       _db.Entry(engineer).State = EntityState.Modified; 
-      _db.SaveChanges(); 
+      _db.SaveChanges();  
       return RedirectToAction("Index"); 
     }
     public ActionResult AddMachine(int id) 
@@ -79,6 +79,20 @@ namespace Factory.Controllers
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+     public ActionResult Delete(int id)
+    {
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(thisEngineer);
+    }
+    
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      _db.Engineers.Remove(thisEngineer);
+      _db.SaveChanges(); 
+      return RedirectToAction("Index"); 
     }
   }
 }
