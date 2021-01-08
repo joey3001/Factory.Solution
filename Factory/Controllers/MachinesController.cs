@@ -17,8 +17,8 @@ namespace Factory.Controllers
     public ActionResult Index()
     {
       List<Machine> model = _db.Machines
-        .Include(machine => machine.Machines)
-        .ThenInclude(join => join.Machine)
+        .Include(machine => machine.Engineers)
+        .ThenInclude(join => join.Engineer)
         .ToList();
       return View(model);
     }
@@ -30,10 +30,10 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Machine machine, int EngineerId)
     {
-      _db.Engineers.Add(engineer);
-      if (MachineId != 0)
+      _db.Machines.Add(machine);
+      if (EngineerId != 0)
       {
-        _db.EngineerMachine.Add(new EngineerMachine() {EngineerId = machine.MachineId, EngineerId = EngineerId});
+        _db.EngineerMachine.Add(new EngineerMachine() {MachineId = machine.MachineId, EngineerId = EngineerId});
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
