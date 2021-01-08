@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using DoctorsOffice.Models;
+using Factory.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -22,5 +22,16 @@ namespace Factory.Controllers
         .ToList();
       return View(model);
     }
+    public ActionResult Create()
+    {
+      return View(); 
+    }
+    [HttpPost]
+    public ActionResult Create(Engineer engineer)
+    {
+      _db.Engineers.Add(engineer);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    } 
   }
 }
