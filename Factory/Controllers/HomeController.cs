@@ -17,9 +17,9 @@ namespace Factory.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-      List<Engineer> model = _db.Engineers
-        .Include(engineer => engineer.Machines)
-        .ThenInclude(join => join.Machine)
+      List<EngineerMachine> model = _db.EngineerMachine
+        .Include(engineerMachine => engineerMachine.Machines)
+        .Include(engineerMachine => engineerMachine.Engineers)
         .ToList();
       return View(model); 
     }
