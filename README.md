@@ -4,7 +4,7 @@
 
 ### 📖 Description
 
-This application utilizes the Entity framework to an setup and manipulate an SQL database. In particular, this application will set up a many-to-many relationship between two classes. All CRUD methods are implemented for both classes & both sides of the many-to-many relationship are viewable from either class. 
+This application utilizes the Entity framework to setup and manipulate an SQL database. In particular, this application will set up a many-to-many relationship between two classes. All CRUD methods are implemented for both classes & both sides of the many-to-many relationship are viewable from either class. 
 
 #### By Joseph Nero 
 
