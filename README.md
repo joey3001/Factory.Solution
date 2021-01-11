@@ -74,7 +74,7 @@ This application utilizes the Entity framework to an setup and manipulate an SQL
 
 6. If you update the structure of the database, use the following command in your terminal program to add a migration : 
 
-          dotnet ef migrations add "The title of your migration"
+            dotnet ef migrations add "The title of your migration"
 
 #### To view the code in the VSCode editor using commands in the terminal :  
 
